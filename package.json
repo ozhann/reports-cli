@@ -1,0 +1,19 @@
+{
+  "name": "listing-report",
+  "version": "1.0.0",
+  "description": "Building CLI for reports",
+  "main": "index.js",
+  "bin": "./bin/reports.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Ozhan Yilmaz",
+  "license": "ISC",
+  "dependencies": {
+    "cli-table3": "^0.6.0",
+    "commander": "^6.0.0",
+    "csvtojson": "^2.0.10",
+    "underscore": "^1.10.2"
+  }
+}
