@@ -28,12 +28,13 @@ program
   .action(() => avgPriceForTopListings());
 
 program
-  .command('topfive')
-  .description('--> The Top 5 most contacted listings per Month')
-  .action(() => monthlyTopFive());
+  .command('topfive <month>')
+  .description('--> Monthly Top 5 most contacted listings from Janury to June')
+  .action(month => monthlyTopFive(month));
 
-// program
-//   .option('-d, --do', 'do something')
-//   .action(test => console.log(`${test}`));
+program
+  .command('say <name>')
+  .description('testing')
+  .action(name => console.log(`${name}`));
 
 program.parse(process.argv);

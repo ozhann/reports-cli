@@ -1,5 +1,6 @@
 const CSVToJSON = require('csvtojson');
 const _ = require('underscore');
+const Table = require('cli-table3');
 
 const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -32,9 +33,14 @@ async function averagePricePerSellerType() {
     otherSellers.reduce((acc, cur) => acc + +cur.price, 0) /
     otherSellers.length;
 
-  console.log(
-    `private: ${avgPrivatePrice} dealer: ${avgDealerPrice} other: ${avgOtherPrice}`
+  const table = new Table({ head: ['Seller Type', 'Average in Euro'] });
+  table.push(
+    ['Private', formatter.format(avgPrivatePrice)],
+    ['Dealer', formatter.format(avgDealerPrice)],
+    ['Other', formatter.format(avgOtherPrice)]
   );
+
+  console.log(table.toString());
 }
 
 // Percentual Distribution of available cars by Make
@@ -55,7 +61,10 @@ async function marketShare() {
       return car;
     });
 
-  console.log(sortAndUpdate);
+  const table = new Table({ head: ['Make', 'Distribution'] });
+  table.push(...sortAndUpdate);
+
+  console.log(table.toString());
 }
 
 // Average price of the 30% most contacted listings
@@ -80,12 +89,14 @@ async function avgPriceForTopListings() {
       .filter(listing => topListings.includes(listing.id))
       .reduce((acc, cur) => acc + +cur.price, 0) / topListings.length;
 
-  const price = formatter.format(avgPrice);
-  console.log(price);
+  const table = new Table({ head: ['Average Price of Top 30%'] });
+  table.push([formatter.format(avgPrice)]);
+
+  console.log(table.toString());
 }
 
 // The Top 5 most contacted listings per Month
-async function monthlyTopFive() {
+async function monthlyTopFive(month) {
   const listings = await CSVToJSON().fromFile('./data/listings.csv');
   const contacts = await CSVToJSON().fromFile('./data/contacts.csv');
 
@@ -101,7 +112,7 @@ async function monthlyTopFive() {
     return item.contact_date;
   });
 
-  const mostContacted = groupedByMonth['January']
+  const mostContacted = groupedByMonth[month]
     .map(listing => listing.listing_id)
     .reduce((prev, cur) => {
       prev[cur] = (prev[cur] || 0) + 1;
@@ -117,7 +128,26 @@ async function monthlyTopFive() {
     topFiveContacted.includes(listing.id)
   );
 
-  console.log(topFiveDetails);
+  const table = new Table({
+    head: ['ranking', 'id', 'make', 'price', 'mileage', 'seller type'],
+  });
+
+  const tableFormat = topFiveDetails
+    .map(obj => {
+      obj.price = formatter.format(obj.price);
+      obj.mileage = obj.mileage + ' KM';
+      return obj;
+    })
+    .map(obj => Object.values(obj));
+  table.push(
+    ['1', ...tableFormat[0]],
+    ['2', ...tableFormat[1]],
+    ['3', ...tableFormat[2]],
+    ['4', ...tableFormat[3]],
+    ['5', ...tableFormat[4]]
+  );
+  console.log(`Month: ${month} 2020`);
+  console.log(table.toString());
 }
 
 module.exports = {
