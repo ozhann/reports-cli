@@ -63,39 +63,26 @@ Ozhans-MacBook-Air:listing-report ozy$
 
 Command "listing-report marketshare" would give below result.
 
-───────────────┬──────────────┐
+
 │ Make          │ Distribution │
-├───────────────┼──────────────┤
+ ------------------------------
 │ Mercedes-Benz │ 16.3%        │
-├───────────────┼──────────────┤
 │ Toyota        │ 16.0%        │
-├───────────────┼──────────────┤
 │ Audi          │ 14.0%        │
-├───────────────┼──────────────┤
 │ Renault       │ 14.0%        │
-├───────────────┼──────────────┤
 │ Mazda         │ 13.3%        │
-├───────────────┼──────────────┤
 │ VW            │ 10.3%        │
-├───────────────┼──────────────┤
 │ Fiat          │ 9.0%         │
-├───────────────┼──────────────┤
 │ BWM           │ 7.0%         │
-└───────────────┴──────────────┘
+
 
 
 ## Average price of the 30% most contacted listings
 
 Command "listing-report mostcontacted" would give below result.
 
-┌──────────────────────────┐
-│ Average Price of Top 30% │
-├──────────────────────────┤
-│ €24,638.87               │
-└──────────────────────────┘
-
 | Average Price of Top 30% │
-|--------------------------|
+ --------------------------
 │ €24,638.87               |
 
 ## The Top 5 most contacted listings per Month
