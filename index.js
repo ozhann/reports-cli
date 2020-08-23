@@ -2,6 +2,7 @@ const CSVToJSON = require('csvtojson');
 const _ = require('underscore');
 const Table = require('cli-table3');
 
+// format price in euro currency
 const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'EUR',
@@ -9,8 +10,10 @@ const formatter = new Intl.NumberFormat('en-US', {
 
 // Average Listing Selling Price per Seller Type
 async function averagePricePerSellerType() {
+  // get listing data as JSON file
   const listings = await CSVToJSON().fromFile('./data/listings.csv');
 
+  // listers sellers by their type
   const privateSellers = listings.filter(
     listing => listing.seller_type === 'private'
   );
@@ -21,6 +24,7 @@ async function averagePricePerSellerType() {
     listing => listing.seller_type === 'dealer'
   );
 
+  // calculates average price for each seller type
   const avgPrivatePrice =
     privateSellers.reduce((acc, cur) => acc + +cur.price, 0) /
     privateSellers.length;
@@ -47,6 +51,7 @@ async function averagePricePerSellerType() {
 async function marketShare() {
   const listings = await CSVToJSON().fromFile('./data/listings.csv');
 
+  // groups and counts listings by make/producer
   const listingNumbersByBrand = listings
     .map(listing => listing.make)
     .reduce((prev, cur) => {
@@ -54,6 +59,7 @@ async function marketShare() {
       return prev;
     }, {});
 
+  // sort the list from highest and makes them percentual
   const sortAndUpdate = Object.entries(listingNumbersByBrand)
     .sort((a, b) => b[1] - a[1])
     .map(car => {
@@ -72,18 +78,21 @@ async function avgPriceForTopListings() {
   const listings = await CSVToJSON().fromFile('./data/listings.csv');
   const contacts = await CSVToJSON().fromFile('./data/contacts.csv');
 
+  // count contacted listings
   const mostContacted = contacts
-    .map(listing => listing.listing_id)
+    .map(contact => contact.listing_id)
     .reduce((prev, cur) => {
       prev[cur] = (prev[cur] || 0) + 1;
       return prev;
     }, {});
 
+  // sort listing.id from highest contacted count and filter top 30%
   const topListings = Object.entries(mostContacted)
     .sort((a, b) => b[1] - a[1])
     .map(el => el[0])
     .filter((el, i) => i < (30 * listings.length) / 100);
 
+  // match prices from listing file and calculate average price
   const avgPrice =
     listings
       .filter(listing => topListings.includes(listing.id))
@@ -100,18 +109,20 @@ async function monthlyTopFive(month) {
   const listings = await CSVToJSON().fromFile('./data/listings.csv');
   const contacts = await CSVToJSON().fromFile('./data/contacts.csv');
 
-  // convert time
+  // convert time format
   const timeConvert = contacts.map(contact => ({
     listing_id: contact.listing_id,
     contact_date: new Date(+contact.contact_date).toLocaleString('de-DE', {
       month: 'long',
     }),
   }));
+
   // group listings by month
   const groupedByMonth = _.groupBy(timeConvert, function (item) {
     return item.contact_date;
   });
 
+  // get monthly most contacted listings from user input
   const mostContacted = groupedByMonth[month]
     .map(listing => listing.listing_id)
     .reduce((prev, cur) => {
@@ -119,6 +130,7 @@ async function monthlyTopFive(month) {
       return prev;
     }, {});
 
+  // sort highest and filter top five
   const topFiveContacted = Object.entries(mostContacted)
     .sort((a, b) => b[1] - a[1])
     .map(el => el[0])

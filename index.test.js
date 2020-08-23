@@ -1,21 +1,22 @@
-const index = require('./index');
+const {
+  averagePricePerSellerType,
+  marketShare,
+  avgPriceForTopListings,
+  monthlyTopFive,
+} = require('./index');
 
-// test('averagePricePerSellerType function exist', () => {
-//   expect(averagePricePerSellerType).toBeDefined();
-// });
+test('averagePricePerSellerType function exist', () => {
+  expect(averagePricePerSellerType).toBeDefined();
+});
 
-const nameCheck = () => console.log('Checking Name....');
+test('marketShare function exist', () => {
+  expect(marketShare).toBeDefined();
+});
 
-describe('Checking Names', () => {
-  beforeEach(() => nameCheck());
+test('avgPriceForTopListings function exist', () => {
+  expect(avgPriceForTopListings).toBeDefined();
+});
 
-  test('User is Jeff', () => {
-    const user = 'Jeff';
-    expect(user).toBe('Jeff');
-  });
-
-  test('User is Karen', () => {
-    const user = 'Karen';
-    expect(user).toBe('Karen');
-  });
+test('monthlyTopFive function exist', () => {
+  expect(monthlyTopFive).toBeDefined();
 });

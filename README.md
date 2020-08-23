@@ -5,7 +5,7 @@
 
 ### Goal of this task
 
-This reporting tool is made to analyze listings data to understand car market based on listing prices and attractiveness, also customer demand, and engagement with these listings.
+This reporting tool is made to analyze listings data to understand marketplace for car listings based on prices and marketshare, also customer demand, and engagement with these listings.
 
 Especially internal business development and marketing departments can benefit from it by adjusting Autoscout24 marketplace to make it more attractive place to connect sellers and buyers and increase traffic and engagement in a more effective manner.
 
@@ -23,16 +23,16 @@ Write a console application that takes the supplied CSV lists and generates the 
 This reporting tool written in Node.js environment.
 It is a CLI tool and expects a command from user to choose and display requested report.
 
-HOW TO RUN IT:
+###### HOW TO RUN IT:
 
 After cloning the project in your local machine, please make sure to install dependencies by using "npm install" command.
 
-Application can be run by "listing-report" command after intallation is done.
+###### Application can be run by "listing-report" command after intallation is done.
 
-IMPORTANT NOTE: It might require to install it globally on your machine in that case you can follow below command.
+###### IMPORTANT NOTE: It might require to install it globally on your machine, in that case you can follow below command.
 Or simply run it by "node ./bin/reports.js" command and it will give you the same result.
 
-"sudo npm link" to install it on your machine globally.
+"sudo npm link" to install it on your machine globally if necessary.
 
 ### Application Guide
 
@@ -58,7 +58,7 @@ After displaying report options, you can simply type "listing-report prices" and
 
 ## Percentual distribution of available cars by Make
 
-Command "listing-report marketshare" would give below result.
+"listing-report marketshare" command would give below result.
 
 
 | Make          | Distribution |
@@ -75,7 +75,7 @@ Command "listing-report marketshare" would give below result.
 
 ## Average price of the 30% most contacted listings
 
-Command "listing-report mostcontacted" would give below result.
+"listing-report mostcontacted" command would give below result.
 
 | Average Price of Top 30% |
 |--------------------------|
@@ -83,9 +83,9 @@ Command "listing-report mostcontacted" would give below result.
 
 ## The Top 5 most contacted listings per Month
 
-Command "listing-report topfive <month>" would give below result.
+"listing-report topfive <month>" command would give below result.
 
-IMPORTANT: You must specify desired month to display report.
+###### IMPORTANT: You must specify desired month to display report.
 
 Example: "listing-report topfive January"
 
