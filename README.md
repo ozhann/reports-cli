@@ -50,7 +50,7 @@ After displaying report options, you can simply type "listing-report prices" and
 
 
 | Seller Type | Average in Euro |
-|-------------------------------|
+|-------------|-----------------|
 | Private     | €26,080.48      |
 | Dealer      | €25,037.34      |
 | Other       | €25,317.76      |
@@ -62,7 +62,7 @@ Command "listing-report marketshare" would give below result.
 
 
 | Make          | Distribution |
-|------------------------------|
+|---------------|--------------|
 | Mercedes-Benz | 16.3%        |
 | Toyota        | 16.0%        |
 | Audi          | 14.0%        |
@@ -92,7 +92,7 @@ Example: "listing-report topfive January"
 Month: January 2020
 
 | ranking | id   | make          | price      | mileage | seller type |
-| --------------------------------------------------------------------|
+| --------|------|---------------|------------|---------|-------------|
 | 1       | 1061 | Renault       | €5,641.00  | 7000 KM | other       |
 | 2       | 1077 | Mercedes-Benz | €8,007.00  | 4000 KM | other       |
 | 3       | 1099 | BWM           | €5,914.00  | 8500 KM | dealer      |
@@ -103,7 +103,7 @@ Month: January 2020
 Month: February 2020
 
 | ranking | id   | make          | price      | mileage | seller type |
-|---------------------------------------------------------------------|
+|---------|------|---------------|------------|---------|-------------|
 | 1       | 1006 | Renault       | €47,446.00 | 7500 KM | other       |
 | 2       | 1138 | Toyota        | €13,986.00 | 8000 KM | other       |
 | 3       | 1235 | Mercedes-Benz | €5,847.00  | 5500 KM | dealer      |
