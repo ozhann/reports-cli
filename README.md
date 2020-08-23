@@ -2,17 +2,9 @@
 
 ### Goal of this task
 
-This task was prepared to give you a "taste" of how our domain looks like a us a sense of how you code and use this as base for discussion on future interview steps. Two CVS files will be provided as data source for this exercise. You will be asked to provide four different reports based on this data. Under "Requirements" and later under "Acceptance Criteria" you will find further information about what to do. We estimate you to invest a maximum of **four to five hours** to finish this task. If you have any question, please contact us.
+This reporting tool is made to analyze listings data to understand car market based on listing prices and attractiveness, also customer demand, and engagement with these listings.
 
-### Technical Info & Expectations
-
-- Language: Feel free to pick any language you're comfortable with. We Recommend (and prefer) Scala, Java or Javascript/NodeJs.
-- Test: Make sure your code is under Test.
-- Documentation Please provide some documentation for:
-  -- How to run the code
-  -- How to run the tests
-  -- If any code generator was used
-- You may send us you code per email packaged in a ZIP file but we would prefer to have just a link of your repository containing all the code, test and documentation on GITHUB.
+Especially internal business development and marketing departments can benefit from it by adjusting Autoscout24 marketplace to make it more attractive place to connect sellers and buyers and increase traffic and engagement in a more effective manner.
 
 ### Requirements:
 
@@ -23,73 +15,119 @@ Write a console application that takes the supplied CSV lists and generates the 
 - Average price of the 30% most contacted listings
 - The Top 5 most contacted listings per Month
 
-### Terms & Taxonomy:
+### Technical Info
 
-- Listing: that's the representation of a car being sold. At AutoScout24, "Listings" are the items you find on our list pages, like for example: [https://www.autoscout24.de/lst].
-- Make: "Producer" of cars, for instance BWM, Audi, VW, etc.
-- Seller Type: What kind of seller is behind that listing. If it's "private", that means the car will be sold by a private person. If it's dealer, it's means that the car is sold on a dealer shop. "Other" means another types of sellers that ate not relevant in this context.
+This reporting tool written in Node.js environment.
+It is a CLI tool and expects a command from user to choose and display requested report.
 
-### Acceptance Criteria:
+HOW TO RUN IT:
 
-##### Average Listing Selling Price per Seller Type
+After cloning the project in your local machine, please make sure to install dependencies by using "npm install" command.
 
-- There are three Seller Types: private, dealer and other.
-- For each of these types, it should be provided an average selling price.
-- The average price should be formatted as € #,-
-- Output format is free for you to choose, but an example could be:
+Application can be run by "listing-report" command after intallation is done.
 
-| Seller Type | Average in Euro |
-| ----------- | --------------- |
-| private     | € 2.500,-       |
-| dealer      | € 3.529,-       |
-| other       | € 1.200,-       |
+IMPORTANT NOTE: It might require to install it globally on your machine in that case you can follow below command.
+Or simply run it by "node ./bin/reports.js" command and it will give you the same result.
 
-##### Percentual distribution of available cars by Make
+"sudo npm link" to install it on your machine globally.
 
-- For each make, it should be reported the percentual amount of listings.
-- The report should be sorted by distribution, where makes with biggest numbers stays on top.
-- Output format is free for you to choose, but an example could be:
+### Application Guide
 
-| Make | Distribution |
-| ---- | ------------ |
-| Audi | 55%          |
-| BMW  | 35%          |
-| VW   | 10%          |
+It can be run by "listing-report" command on console and it will give user following reporting options.
 
-##### Average price of the 30% most contacted listings
+    Commands:
+    prices           --> Average Listing Selling Price per Seller Type
+    marketshare      --> Percentual Distribution of available cars by Make
+    mostcontacted    --> Average price of the 30% most contacted listings
+    topfive <month>  --> Monthly Top 5 most contacted listings from Janury to June
 
-- Using the "Contacts CSV list", report the average price(format: € #,-) of the 30% most contacted listings.
-- Output format is free for you to choose, but an example could be:
+## Average Listing Selling Price per Seller Type
 
-| Average price |
-| ------------- |
-| € 12.512,-    |
+After displaying report options, you can simply type "listing-report prices" and it would output the following result.
 
-##### The Top 5 most contacted listings per Month
+────────────┬─────────────────┐
+│ Seller Type │ Average in Euro │
+├─────────────┼─────────────────┤
+│ Private │ €26,080.48 │
+├─────────────┼─────────────────┤
+│ Dealer │ €25,037.34 │
+├─────────────┼─────────────────┤
+│ Other │ €25,317.76 │
 
-- Using the "Contacts CSV list", report which listing had more contacts in each month.
-- Reported fields: Ranking, Listing Id, Make, Selling Price (format: € #,-), Mileage(format: # KM), Total Amount of contacts
-- Output format is free for you to choose, but an example could be:
+## Percentual distribution of available cars by Make
 
-Month: 01.2020
+Command "listing-report marketshare" would give below result.
 
-| Ranking | Listing Id | Make    | Selling Price | Mileage   | Total Amount of contacts |
-| ------- | ---------- | ------- | ------------- | --------- | ------------------------ |
-| 1       | 1000       | BWM     | € 2.538,-     | 50.000 KM | 15                       |
-| 2       | 1001       | Audi    | € 4.300,-     | 20.000 KM | 12                       |
-| 3       | 1002       | Toyota  | € 18.250,-    | 35.000 KM | 11                       |
-| 4       | 1003       | VW      | € 25.080,-    | 45.678 KM | 10                       |
-| 5       | 1004       | Porsche | € 102.000,-   | 2.000 KM  | 8                        |
+───────────────┬──────────────┐
+│ Make │ Distribution │
+├───────────────┼──────────────┤
+│ Mercedes-Benz │ 16.3% │
+├───────────────┼──────────────┤
+│ Toyota │ 16.0% │
+├───────────────┼──────────────┤
+│ Audi │ 14.0% │
+├───────────────┼──────────────┤
+│ Renault │ 14.0% │
+├───────────────┼──────────────┤
+│ Mazda │ 13.3% │
+├───────────────┼──────────────┤
+│ VW │ 10.3% │
+├───────────────┼──────────────┤
+│ Fiat │ 9.0% │
+├───────────────┼──────────────┤
+│ BWM │ 7.0% │
 
-Month: 02.2020
+## Average price of the 30% most contacted listings
 
-| Ranking | Listing Id | Make    | Selling Price | Mileage   | Total Amount of contacts |
-| ------- | ---------- | ------- | ------------- | --------- | ------------------------ |
-| 1       | 1004       | Porsche | € 102.000,-   | 2.000 KM  | 18                       |
-| 2       | 1001       | Audi    | € 4.300,-     | 20.000 KM | 17                       |
-| 3       | 1000       | BWM     | € 2.538,-     | 50.000 KM | 15                       |
-| 4       | 1003       | VW      | € 25.080,-    | 45.678 KM | 10                       |
-| 5       | 1002       | Toyota  | € 18.250,-    | 35.000 KM | 3                        |
+Command "listing-report mostcontacted" would give below result.
+
+──────────────────────────┐
+│ Average Price of Top 30% │
+├──────────────────────────┤
+│ €24,638.87 │
+└──────────────────────────┘
+
+## The Top 5 most contacted listings per Month
+
+Command "listing-report topfive <month>" would give below result.
+
+IMPORTANT: You must specify desired month to display report.
+
+Example: "listing-report topfive January"
+
+Month: January 2020
+┌─────────┬──────┬───────────────┬────────────┬─────────┬─────────────┐
+│ ranking │ id │ make │ price │ mileage │ seller type │
+├─────────┼──────┼───────────────┼────────────┼─────────┼─────────────┤
+│ 1 │ 1061 │ Renault │ €5,641.00 │ 7000 KM │ other │
+├─────────┼──────┼───────────────┼────────────┼─────────┼─────────────┤
+│ 2 │ 1077 │ Mercedes-Benz │ €8,007.00 │ 4000 KM │ other │
+├─────────┼──────┼───────────────┼────────────┼─────────┼─────────────┤
+│ 3 │ 1099 │ BWM │ €5,914.00 │ 8500 KM │ dealer │
+├─────────┼──────┼───────────────┼────────────┼─────────┼─────────────┤
+│ 4 │ 1122 │ Audi │ €40,481.00 │ 2000 KM │ other │
+├─────────┼──────┼───────────────┼────────────┼─────────┼─────────────┤
+│ 5 │ 1132 │ Mercedes-Benz │ €34,490.00 │ 7000 KM │ dealer │
+└─────────┴──────┴───────────────┴────────────┴─────────┴─────────────┘
+
+Month: February 2020
+┌─────────┬──────┬───────────────┬────────────┬─────────┬─────────────┐
+│ ranking │ id │ make │ price │ mileage │ seller type │
+├─────────┼──────┼───────────────┼────────────┼─────────┼─────────────┤
+│ 1 │ 1006 │ Renault │ €47,446.00 │ 7500 KM │ other │
+├─────────┼──────┼───────────────┼────────────┼─────────┼─────────────┤
+│ 2 │ 1138 │ Toyota │ €13,986.00 │ 8000 KM │ other │
+├─────────┼──────┼───────────────┼────────────┼─────────┼─────────────┤
+│ 3 │ 1235 │ Mercedes-Benz │ €5,847.00 │ 5500 KM │ dealer │
+├─────────┼──────┼───────────────┼────────────┼─────────┼─────────────┤
+│ 4 │ 1250 │ Renault │ €8,446.00 │ 5000 KM │ dealer │
+├─────────┼──────┼───────────────┼────────────┼─────────┼─────────────┤
+│ 5 │ 1271 │ Mercedes-Benz │ €47,165.00 │ 6500 KM │ private │
+
+### How to run the test
+
+Test is written with Jest framework.
+It can be run with "npm test" command.
 
 ##### Definition of the CSV files
 

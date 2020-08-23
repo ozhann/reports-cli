@@ -32,9 +32,4 @@ program
   .description('--> Monthly Top 5 most contacted listings from Janury to June')
   .action(month => monthlyTopFive(month));
 
-program
-  .command('say <name>')
-  .description('testing')
-  .action(name => console.log(`${name}`));
-
 program.parse(process.argv);
