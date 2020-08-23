@@ -94,6 +94,10 @@ Command "listing-report mostcontacted" would give below result.
 │ €24,638.87               │
 └──────────────────────────┘
 
+| Average Price of Top 30% │
+----------------------------
+│ €24,638.87               |
+
 ## The Top 5 most contacted listings per Month
 
 Command "listing-report topfive <month>" would give below result.
@@ -132,7 +136,7 @@ Month: February 2020
 ├─────────┼──────┼───────────────┼────────────┼─────────┼─────────────┤
 │ 5       │ 1271 │ Mercedes-Benz │ €47,165.00 │ 6500 KM │ private     │
 └─────────┴──────┴───────────────┴────────────┴─────────┴─────────────┘
-Ozhans-MacBook-Air:listing-report ozy$ 
+
 ### How to run the test
 
 Test is written with Jest framework.
@@ -156,6 +160,9 @@ It can be run with "npm test" command.
 | ------------ | ------- | -------- |
 | listing_id   | numeric | yes      |
 | contact_date | lis     | yes      |
+
+
+
 
 
 <!-- prettier-ignore-end -->
