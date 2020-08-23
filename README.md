@@ -95,7 +95,7 @@ Command "listing-report mostcontacted" would give below result.
 └──────────────────────────┘
 
 | Average Price of Top 30% │
-----------------------------
+|--------------------------|
 │ €24,638.87               |
 
 ## The Top 5 most contacted listings per Month
