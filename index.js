@@ -2,6 +2,8 @@ const CSVToJSON = require('csvtojson');
 const _ = require('underscore');
 const Table = require('cli-table3');
 
+const { fetchListingsData, fetchContactsData } = require('./data');
+
 // format price in euro currency
 const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -12,7 +14,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 async function averagePricePerSellerType() {
   // get listing data as JSON file
   const listings = await CSVToJSON().fromFile('./data/listings.csv');
-
+  // const listings = await fetchListingsData();
   // listers sellers by their type
   const privateSellers = listings.filter(
     listing => listing.seller_type === 'private'
@@ -130,6 +132,7 @@ async function monthlyTopFive(month) {
       return prev;
     }, {});
 
+  // console.log(mostContacted);
   // sort highest and filter top five
   const topFiveContacted = Object.entries(mostContacted)
     .sort((a, b) => b[1] - a[1])
@@ -151,6 +154,7 @@ async function monthlyTopFive(month) {
       return obj;
     })
     .map(obj => Object.values(obj));
+
   table.push(
     ['1', ...tableFormat[0]],
     ['2', ...tableFormat[1]],
@@ -158,9 +162,61 @@ async function monthlyTopFive(month) {
     ['4', ...tableFormat[3]],
     ['5', ...tableFormat[4]]
   );
+
   console.log(`Month: ${month} 2020`);
   console.log(table.toString());
 }
+
+// Makes Top Night Contact Report
+
+// Estimated Time: 10-15 Minutes
+
+// Extend your current console application with the "Makes Report". The report should contain the following set of information:
+
+// Which Make(s) had the biggest number of contacts during night (6pm to 2am UTC)
+// Example: Make(s): BWM (786 contacts)
+
+async function contactsAtNight() {
+  const contacts = await CSVToJSON().fromFile('./data/contacts.csv');
+  const listings = await CSVToJSON().fromFile('./data/listings.csv');
+
+  const timeConvert = contacts.map(contact => ({
+    listing_id: contact.listing_id,
+    contact_date: new Date(+contact.contact_date).getUTCHours(),
+  }));
+
+  const mostContactedByHour = timeConvert
+    .filter(time => time.contact_date >= 18 || time.contact_date <= 2)
+    .map(listing => listing.listing_id)
+    .reduce((prev, cur) => {
+      prev[cur] = (prev[cur] || 0) + 1;
+      return prev;
+    }, {});
+
+  // console.log(mostContactedByHour);
+
+  const add = listings.map(listing => {
+    listing.count = mostContactedByHour[listing.id];
+    return listing;
+  });
+  // console.log(add);
+
+  const contactByBrand = add.reduce((acc, val) => {
+    acc[val.make] = val.count;
+    return acc;
+  }, {});
+
+  console.log(contactByBrand);
+}
+
+contactsAtNight();
+
+// Makes Top Prices Report
+
+// Estimated Time: 5-10 Minutes
+
+// Which Make(s) have average price higher than the overall average(comma separated list)
+// Example: Make(s): Audi, BWM, VW
 
 module.exports = {
   averagePricePerSellerType,
