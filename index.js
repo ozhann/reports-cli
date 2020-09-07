@@ -218,6 +218,12 @@ contactsAtNight();
 // Which Make(s) have average price higher than the overall average(comma separated list)
 // Example: Make(s): Audi, BWM, VW
 
+function higherAverage() {
+  console.log('brands higher than average prices ');
+}
+
+higherAverage();
+
 module.exports = {
   averagePricePerSellerType,
   marketShare,
